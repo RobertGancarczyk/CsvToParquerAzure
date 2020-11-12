@@ -1,7 +1,6 @@
 import uuid
 from datetime import date, datetime, timedelta
-from azure.storage.blob import BlobServiceClient
-from azure.storage.blob import BlobClient, generate_blob_sas, BlobSasPermissions
+from azure.storage.blob import BlobClient, generate_blob_sas, BlobSasPermissions, BlobServiceClient
 import pandas as pd
 import snappy
 import sys
