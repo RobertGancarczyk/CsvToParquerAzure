@@ -18,6 +18,7 @@ steps:
     architecture: 'x64'
 
 - script: |
+    pip install pytest requests setuptools wheel
     pip install -U databricks-connect==6.4.*
   displayName: 'Load Python Dependencies'
 
