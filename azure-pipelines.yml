@@ -18,7 +18,7 @@ steps:
     architecture: 'x64'
 
 - script: |
-    pip install -U databricks-connect==5.5.*
+    pip install -U databricks-connect==6.4.*
   displayName: 'Load Python Dependencies'
 
 - script: |
