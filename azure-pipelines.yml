@@ -24,6 +24,6 @@ steps:
 
 - task: executenotebook@0
   inputs:
-    notebookPath: '/CsvToParquet'
+    notebookPath: /CsvToParquet
     existingClusterId: '1117-220543-haze541'
     
