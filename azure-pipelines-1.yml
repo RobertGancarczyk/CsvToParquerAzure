@@ -26,7 +26,7 @@ steps:
   displayName: 'Install databricks-cli'
 
 - script: |
-   databricks workspace import CsvToParquerAzure.py  $(notebook-folder) -o -l PYTHON
+   databricks workspace import_dir $(notebook-folder) -o
   env:
     DATABRICKS_TOKEN: $(databricks-token)
     DATABRICKS_HOST: $(databricks-host)
