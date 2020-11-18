@@ -28,7 +28,7 @@ steps:
 
 - task: deploynotebooks@0
   inputs:
-    notebooksFolderPath: '/$(notebook-name).py'
+    notebooksFolderPath: '/'
     workspaceFolder: '/Shared'
 
 #- script: |
