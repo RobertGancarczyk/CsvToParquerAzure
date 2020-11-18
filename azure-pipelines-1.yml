@@ -16,6 +16,10 @@ variables:
   notebook-name: 'CsvToParquerAzure'
 
 steps:
+- task: UsePythonVersion@0
+  displayName: 'Use Python 3.7'
+  inputs:
+    versionSpec: 3.7
 - task: configuredatabricks@0
   inputs:
     url: $(databricks-host)
