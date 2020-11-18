@@ -10,6 +10,12 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.7'
+    addToPath: true
+    architecture: 'x64'
+
 - task: configuredatabricks@0
   inputs:
     url: 'https://adb-6120026223134701.1.azuredatabricks.net/'
