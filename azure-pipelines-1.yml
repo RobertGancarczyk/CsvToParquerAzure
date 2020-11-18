@@ -15,6 +15,7 @@ variables:
   cluster-id: '1117-220543-haze541'
   notebook-name: 'CsvToParquerAzure'
 
+steps:
 - script: |
     pip install databricks-cli
   displayName: 'Install databricks-cli'
