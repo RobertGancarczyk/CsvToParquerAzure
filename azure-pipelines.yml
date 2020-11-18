@@ -22,13 +22,9 @@ steps:
     token: 'dapi704eaae87c3305fcd13616a7bc80f183'
   displayName: 'Configure Databricks'
 
-- script: |
-    pip install databricks-cli
-  displayName: 'Install databricks-cli'
-  
 - task: executenotebook@0
   inputs:
-    notebookPath: '/CsvToParquet'
+    notebookPath: 'CsvToParquet'
     existingClusterId: '1117-220543-haze541'
   displayName: 'Execute Databricks Notebook'
     
