@@ -35,7 +35,7 @@ steps:
   persistCredentials: true
   clean: true
 
-- script: git checkout release
+- script: git checkout
   displayName: 'Get Latest Branch'
   
 - script: |
