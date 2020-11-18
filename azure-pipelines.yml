@@ -22,7 +22,7 @@ steps:
     token: 'dapi704eaae87c3305fcd13616a7bc80f183'
   displayName: 'Configure Databricks'
     
-- task: deploynotebooks@0
+- task: executenotebook@0
   inputs:
-    notebooksFolderPath: '/CsvToParquet'
-    workspaceFolder: '/Shared'
+    notebookPath: '/CsvToParquerAzure'
+    existingClusterId: '1117-220543-haze541'
