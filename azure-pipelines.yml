@@ -18,7 +18,6 @@ steps:
     architecture: 'x64'
 
 - script: |
-    pip install pytest requests setuptools wheel
     pip install -U databricks-connect==6.4.*
   displayName: 'Load Python Dependencies'
 
@@ -38,12 +37,7 @@ steps:
 - script: git checkout
   displayName: 'Get Latest Branch'
   
-- script: |
-    cd $(Build.Repository.LocalPath)/libraries/python/test
-    python3 setup.py sdist test_wheel
-    ls dist/
-  displayName: 'Build Python Wheel for Libs'
-
+  
 - script: |
     git diff --name-only --diff-filter=AMR HEAD^1 HEAD | xargs -I '{}' cp --parents -r '{}' $(Build.BinariesDirectory)
 
