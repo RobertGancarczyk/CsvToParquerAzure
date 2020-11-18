@@ -26,7 +26,7 @@ steps:
   displayName: 'Install databricks-cli'
 
 - script: |
-   databricks workspace import src/ $(notebook-folder) -o -l PYTHON
+   databricks workspace import /$(notebook-name)  $(notebook-folder) -o -l PYTHON
   env:
     DATABRICKS_TOKEN: $(databricks-token)
     DATABRICKS_HOST: $(databricks-host)
