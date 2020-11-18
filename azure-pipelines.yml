@@ -24,5 +24,5 @@ steps:
     
 - task: deploynotebooks@0
   inputs:
-    notebooksFolderPath: '/'
+    notebooksFolderPath: '/CsvToParquet'
     workspaceFolder: '/Shared'
