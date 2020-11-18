@@ -14,20 +14,26 @@ variables:
   notebook-folder: '/Shared/'
   cluster-id: '1117-220543-haze541'
   notebook-name: 'CsvToParquerAzure'
-  databricks-token: 'dapi344af1df9a6e0bb2a204cc4dbe881810'
-
 
 steps:
-- task: UsePythonVersion@0
-  displayName: 'Use Python 3.x'
+- task: configuredatabricks@0
+  inputs:
+    url: $(databricks-host)
+    token: $(databricks-token)
+  displayName: 'Configure Databrick'
 
-- script: |
-    pip install databricks-cli
-  displayName: 'Install databricks-cli'
+- task: deploynotebooks@0
+  inputs:
+    notebooksFolderPath: '/'
+    workspaceFolder: '/Shared'
 
-- script: |
-   databricks workspace import_dir $(notebook-folder) -o
-  env:
-    DATABRICKS_TOKEN: $(databricks-token)
-    DATABRICKS_HOST: $(databricks-host)
+#- script: |
+#    pip install databricks-cli
+#  displayName: 'Install databricks-cli'
+
+#- script: |
+#   databricks workspace import_dir $(notebook-folder) -o
+#  env:
+#    DATABRICKS_TOKEN: $(databricks-token)
+#    DATABRICKS_HOST: $(databricks-host)
 
