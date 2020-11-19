@@ -1,28 +1,56 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-resources:
-  - repo: self
+# Azure Databricks Build Pipeline
+# azure-pipelines.yml
 
 trigger:
-  - master
+- release
 
-variables:
-  databricks-host: 'https://adb-6120026223134701.1.azuredatabricks.net'
-  notebook-folder: '/Shared/'
-  cluster-id: '1117-220543-haze541'
-  notebook-name: 'CsvToParquerAzure'
+pool:
+  name: Hosted Ubuntu 1604
 
 steps:
-- script: |
-    pip install databricks-cli
-  displayName: 'Install databricks-cli'
+- task: UsePythonVersion@0
+  displayName: 'Use Python 3.7'
+  inputs:
+    versionSpec: 3.7
 
 - script: |
-   databricks workspace import_dir / /Shared -o
-  env:
-    DATABRICKS_TOKEN: $(databricks-token)
-    DATABRICKS_HOST: $(databricks-host)
+    pip install pytest requests setuptools wheel
+    pip install -U databricks-connect==6.4.*
+  displayName: 'Load Python Dependencies'
+
+- script: |
+    echo "y
+    $(WORKSPACE-REGION-URL)
+    $(CSE-DEVELOP-PAT)
+    $(EXISTING-CLUSTER-ID)
+    $(WORKSPACE-ORG-ID)
+    15001" | databricks-connect configure
+  displayName: 'Configure DBConnect'
+
+- checkout: self
+  persistCredentials: true
+  clean: true
+
+- script: git checkout release
+  displayName: 'Get Latest Branch'
+
+- script: |
+    git diff --name-only --diff-filter=AMR HEAD^1 HEAD | xargs -I '{}' cp --parents -r '{}' $(Build.BinariesDirectory)
+
+    mkdir -p $(Build.BinariesDirectory)/cicd-scripts
+    cp $(Build.Repository.LocalPath)/cicd-scripts/*.* $(Build.BinariesDirectory)/cicd-scripts
+
+  displayName: 'Get Changes'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: 'DatabricksBuild'
 
