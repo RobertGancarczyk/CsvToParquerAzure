@@ -2,7 +2,7 @@
 # azure-pipelines.yml
 
 trigger:
-- master
+- main
 
 pool:
   name: Hosted Ubuntu 1604
