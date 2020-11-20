@@ -6,6 +6,9 @@ import snappy
 import sys
 #DevOps TEST
 #DevOps TEST
+#DevOps TEST
+#DevOps TEST
+#DevOps TEST
 try:
 #DATA INPUT
     account_name = "rcmsdwh"
